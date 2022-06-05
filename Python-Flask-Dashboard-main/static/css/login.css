@@ -1,0 +1,50 @@
+body{
+    background-color: #ecf7eb;
+}
+#login-card{
+    
+    height: 600px;
+}
+#img-col{
+    background-color: aqua;
+    
+}
+#log-col{
+background-color: #ecf7eb;
+}
+.row{
+    margin: 0%;
+}
+
+img{
+    width: 700px;
+    height: 600px;
+    margin: 0%;
+    margin-left: -20px;
+}
+
+.form-container{
+    margin-top: 100px;
+}
+
+.form-container input{
+    margin: 30px 0 30px 0;
+}
+
+.form-container .button-log{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    text-align: center;
+    color: #105e25;
+}
+
+.btn{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

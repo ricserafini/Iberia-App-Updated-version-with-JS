@@ -1,0 +1,10 @@
+input {
+    border: 10px solid black;
+}
+.button-logout{
+    padding-left: 80%;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: right;
+}

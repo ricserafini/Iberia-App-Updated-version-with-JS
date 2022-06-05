@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iberia Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var incidentTypeBreakdownFractionData = google.visualization.arrayToDataTable([
+			{% for key, value in incidentTypeBreakdownFraction.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var incidentTypeBreakdownFractionOptions = {
+        
+          is3D: true,
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('pie-chart-breakdown'));
+        chart1.draw(incidentTypeBreakdownFractionData, incidentTypeBreakdownFractionOptions);
+
+        var backlogTypeBreakdownData = google.visualization.arrayToDataTable([
+			{% for key, value in backlogTypeBreakdown.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var backlogTypeBreakdownOptions = {
+          is3D: true,
+        };
+
+        var chart2 = new google.visualization.PieChart(document.getElementById('pie-chart-backlog'));
+        chart2.draw(backlogTypeBreakdownData, backlogTypeBreakdownOptions);
+
+        var incidentTypeBreakdownData = google.visualization.arrayToDataTable([
+			{% for key, value in incidentTypeBreakdown.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var incidentTypeBreakdownOptions = {
+          is3D: true,
+        };
+
+        var chart2 = new google.visualization.PieChart(document.getElementById('pie-chart-type-brkd'));
+        chart2.draw(incidentTypeBreakdownData, incidentTypeBreakdownOptions);
+
+        var p1SLAResolutionTimeData = google.visualization.arrayToDataTable([
+			{% for key, value in p1SLAResolutionTime.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var p1SLAResolutionTimeOptions = {
+          is3D: true,
+        };
+
+        var chart3 = new google.visualization.PieChart(document.getElementById('pie-chart-sla-meets'));
+        chart3.draw(p1SLAResolutionTimeData, p1SLAResolutionTimeOptions);
+
+        var incidentStatusTypeData = google.visualization.arrayToDataTable([
+			{% for key, value in incidentStatusType.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var incidentStatusTypeOptions = {
+          is3D: true,
+        };
+
+        var chart4 = new google.visualization.PieChart(document.getElementById('pie-chart-custom'));
+        chart4.draw(incidentStatusTypeData, incidentStatusTypeOptions);
+
+        var totalInsData = google.visualization.arrayToDataTable([
+			{% for key, value in totalIns.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var totalInsOptions = {
+          is3D: true,
+        };
+
+        var chart5 = new google.visualization.LineChart(document.getElementById('line-chart-total-incidents'));
+        chart5.draw(totalInsData, totalInsOptions);
+
+        var totalCriticalInsData = google.visualization.arrayToDataTable([
+			{% for key, value in totalCriticalIns.items() %}
+				{% if value is string %}
+					['{{ key }}', '{{ value }}'],
+				{% else %}
+					['{{ key }}', {{ value }}],
+				{% endif %}
+			{% endfor %}
+        ]);
+
+        var totalCriticalInsOptions = {
+          is3D: true,
+        };
+
+        var chart6 = new google.visualization.BarChart(document.getElementById('bar-chart-total-critical-incidents'));
+        chart6.draw(totalCriticalInsData, totalCriticalInsOptions);
+
+      }
+    </script>
+
+</head>
+
+<body>
+    <section class="hero is-fullheight" style="background-color:#C4FCEF;">
+        <form action="{{ url_for('logout') }}" method="post">
+            <div class="button-logout">
+                <button type="submit" class="btn btn-danger pl-2"> Log out </button>
+            </div>
+        </form>
+        
+        <h1 class="mt-2" style="text-align: center;">Iberia Report</h1>
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container" >
+                    <div id="navbarMenuHeroA" class="navbar-menu" style="border: black;">
+                        <div class="navbar-end">
+                            {% if dashboard1 %}
+                            <button class="btn btn-dark"><a href="{{ url_for('dashboard1') }}"  style="text-decoration: none; color: rgb(247, 243, 243); border: #000;" >
+                                April
+                            </a></button>
+                            <button class="btn btn-light"><a href="{{ url_for('dashboard2') }}" style="text-decoration: none; color:  #000;; border: #000;" >
+                                Monthly Trends
+                            </a></button>
+                            {% endif %}
+                            {% if dashboard2 %}
+                            <button class="btn btn-light"><a href="{{ url_for('dashboard1') }}"  style="text-decoration: none; color:  #000; border: #000;" >
+                                April
+                            </a></button>
+                            <button class="btn btn-dark"><a href="{{ url_for('dashboard2') }}" style="text-decoration: none; color:  rgb(247, 243, 243); border: #000;" >
+                                Monthly Trends
+                            </a></button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        {% if dashboard2 %}
+        <div class="container">
+            <form class="form-inline mt-1" method="POST" action="{{ url_for('dashboard2') }}">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="row">
+                            <select name="comp_select" class="form-select form-select-lg mb-3">
+                                <option selected>Choose a Month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <!-- <option value="{{set_option}}" selected>{{set_option}}</option> -->
+                            </select>
+                            <button type="submit" class="btn btn-success pl-2">Load Data</button>
+                        </div>
+                    </div>
+    
+                </div>
+            </form>
+        </div>
+        <div class="container mt-5">
+            <h4 class="m-4">{{set_option}} Information</h4>
+            <div class="card shadow-lg rounded" style="padding: 20px;">
+                <div class="card shadow-lg card p-4 m-4 border border-primary " style="padding: 20px;">
+                    <h5>Monthly Total Incidents</h5>
+                    <div >
+                        <div id="line-chart-total-incidents" style="width: 900px; height: 500px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-lg rounded" style="padding: 20px;">
+                <div class="card shadow-lg card p-4 m-4 border border-primary " style="padding: 20px;">
+                    <h5>Monthly Critical Incidents</h5>
+                    <div >
+                        <div id="bar-chart-total-critical-incidents" style="width: 900px; height: 500px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+            <div class="container mt-5">
+                <div class="card shadow-lg rounded" style="padding: 20px;">  
+                    <div class="row">
+                        <div class="col">
+                            <div class="card p-4 m-4 shadow border border-success">
+                                <h5 class="text-center text-secondary">
+                                    Total Incidents for <br/> {{ month}} 2021: <strong >{{totalIncidents}}</strong>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card p-4 m-4 shadow border border-danger border-left">
+                                <h5 class="text-center text-secondary">
+                                    Critical Incidents for <br/> {{ month}} 2021: <strong >{{criticalIncidents}}</strong>
+                                </h5>
+                            </div>
+                        </div>
+                        </div>                   
+                    <div>
+                        <div class="card p-4 m-4 shadow border border-danger border-left">
+                            <h5>Incident type breakdown</h5>
+                            <div id="pie-chart-breakdown" style="width: 900px; height: 500px; margin-left: 12%;"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="card shadow-lg rounded" style="padding: 20px;">
+                    <div class="card shadow-lg card p-4 m-4 border border-primary " style="padding: 20px;">
+                        <h5>Backlog type breakdown</h5>
+                        <div >
+                            <div id="pie-chart-backlog" style="width: 900px; height: 500px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container mt-5">
+                <div class="card shadow-lg rounded" style="padding: 20px;">
+                    <div class="card shadow-lg card p-4 m-4 border border-warning " style="padding: 20px;">
+                        <h5>Incident type breakdown</h5>
+                        <div >
+                            <div id="pie-chart-type-brkd" style="width: 900px; height: 500px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container mt-5">
+                <div class="card shadow-lg rounded" style="padding: 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card p-4 m-4 shadow border border-success">
+                                <h5 class="text-center text-secondary">
+                                    P1 Average time of resolution when SLA-compliant for <br/> {{ month}} 2021: <strong >{{p1AverageTimeSLA}}</strong> 
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card p-4 m-4 shadow border border-danger border-left">
+                                <h5 class="text-center text-secondary">
+                                    P1 Average time of resolution when NOT SLA-compliant for <br/> {{ month}} 2021: <strong >{{p1AverageTimeNotSLA}}</strong>  
+                                </h5>
+                            </div>
+                        </div>
+                        </div>   
+                    <div class="card shadow-lg card p-4 m-4 border border-success " style="padding: 20px;">
+                        <h5>P1 SLA Resolution time</h5>
+                        <div >
+                            <div id="pie-chart-sla-meets" style="width: 900px; height: 500px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="card shadow-lg rounded" style="padding: 20px;"> 
+                    <div class="card shadow-lg card p-4 m-4 border border-info " style="padding: 20px;">
+                        <h5>Custom KPI: Breakdown of incident status type (null values are shown to highlight the number of missing column values)</h5>
+                        <div >
+                            <div id="pie-chart-custom" style="width: 900px; height: 500px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </section>
+</body>
+</html>
